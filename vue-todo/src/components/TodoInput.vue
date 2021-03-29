@@ -1,29 +1,32 @@
 <template>
   <div class="inputBox shadow">
-      <input type="text" v-model="addTodo" v-on:keyup.enter="addTodoList">
-      <!-- <button v-on:click="addTodoList">add</button> -->
-      <span class="addContainer" v-on:click="addTodoList">
-          <i class="fas fa-plus addBtn"></i>
-      </span>
+		<input type="text" v-model="addTodo" v-on:keyup.enter="addTodoList">
+		<!-- <button v-on:click="addTodoList">add</button> -->
+		<span class="addContainer" v-on:click="addTodoList">
+				<i class="fas fa-plus addBtn"></i>
+		</span>
   </div>
 </template>
 
 <script>
 export default {
-    data : function () {
-        return {
-            addTodo : ""
-        }
-    },
-    methods : {
-        addTodoList : function () {
-            localStorage.setItem(this.addTodo, this.addTodo);
-            this.clearInput();
-        },
-        clearInput : function () {
-            this.addTodo = "";
-        }
-    }
+	data : function () {
+		return {
+			addTodo : ""
+		}
+	},
+	methods : {
+		addTodoList : function () {
+			if (this.addTodo !== '') {
+				var obj = {complete: false, item: this.addTodo} //변수안에 complete, item 이라는 속성값을 추가함
+				localStorage.setItem(this.addTodo, JSON.stringify(obj))
+				this.clearInput()
+			}
+		},
+		clearInput : function () {
+			this.addTodo = ""
+		}
+	}
 }
 </script>
 
