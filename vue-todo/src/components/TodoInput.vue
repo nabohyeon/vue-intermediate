@@ -18,8 +18,7 @@ export default {
 	methods : {
 		addTodoList : function () {
 			if (this.addTodo !== '') {
-				var obj = {complete: false, item: this.addTodo} //변수안에 complete, item 이라는 속성값을 추가함
-				localStorage.setItem(this.addTodo, JSON.stringify(obj))
+                this.$emit('addTodoItem', this.addTodo)
 				this.clearInput()
 			}
 		},
